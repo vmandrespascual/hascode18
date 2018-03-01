@@ -1,8 +1,8 @@
 
 var Ride = function(st, ed, earl, last) {
 
-	this.start = st;
-	this.finish = ed;
+	this.start = st; //location instance
+	this.finish = ed; //location instance
 	this.earliest = earl;
 	this.latest = last;
 	this.car = null;
