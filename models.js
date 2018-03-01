@@ -5,7 +5,14 @@ var Ride = function(st, ed, earl, last) {
 	this.finish = ed;
 	this.earliest = earl;
 	this.latest = last;
+	this.car = null;
 }
+
+Ride.prototype.assignRide = function(car) {
+	car.isBusy = true;
+	this.car = car;
+}
+
 
 var Location = function(a, b) {
 	this.x = a;
