@@ -1,12 +1,5 @@
-var car = function() {
 
-	this.location_x = 0;
-	this.location_y = 0;
-	this.isBusy = false; 
-}
-
-
-var ride = function(st, ed, earl, last) {
+var Ride = function(st, ed, earl, last) {
 
 	this.start = st;
 	this.finish = ed;
@@ -14,6 +7,19 @@ var ride = function(st, ed, earl, last) {
 	this.latest = last;
 }
 
+var Location = function(a, b) {
+	this.x = a;
+	this.y = b;
+}
 
-module.exports.car = car;
-module.exports.ride = ride;
+
+var Car = function() {
+
+	this.location = new Location(0,0);
+	this.isBusy = false; 
+}
+
+
+module.exports.Car = Car;
+module.exports.Ride = Ride;
+module.exports.Location = Location;
