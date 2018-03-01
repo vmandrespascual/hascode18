@@ -9,7 +9,7 @@ var Ride = function(st, ed, earl, last) {
 }
 
 Ride.prototype.assignRide = function(car) {
-	car.isBusy = true;
+	car.currentTrip = this;
 	this.car = car;
 }
 
@@ -23,9 +23,12 @@ var Location = function(a, b) {
 var Car = function() {
 
 	this.location = new Location(0,0);
-	this.isBusy = false; 
+	this.currentTrip = null;
 }
 
+Car.protoype.isBusy = function() {
+	return this.currentTrip != undefined;
+}
 
 module.exports.Car = Car;
 module.exports.Ride = Ride;
