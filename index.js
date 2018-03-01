@@ -2,6 +2,7 @@ var Models = require('./models.js');
 var Algoritmo = require('./algoritmo.js');
 
 
+
 var fs = require('fs');
 
 var nameFile = null;
@@ -13,26 +14,38 @@ if(nameFile != null){
 	nameFile = 'a_example.in'; //Name File
 }
 //const nameFile = require('nameFile');
-console.log('Inicio');
+console.log('Start');
 var archivo = fs.readFileSync(nameFile, 'utf-8');
-var riders = [];
+var riderList = [];
 var conf = [];
 
-var matrixValue = [];
-
-	//console.log(archivo.slice(0, c+2));
 	matrix = archivo.split("\n");
 	conf = matrix[0].split(" ");
 
-	var Game = new Models.Game(conf[0],conf[1],conf[2],conf[3],conf[4],conf[5]);
+	var Game = new Models.Game(parseInt(conf[0]),parseInt(conf[1]),parseInt(conf[2]),parseInt(conf[3]),parseInt(conf[4]),parseInt(conf[5]));
 
-	var linea = 1;
+	var line = 1;
 	for(i = 0; i < Game.rides; i++){
-		var maEp = matrix[linea].split(' ');
-		console.log(maEp);
-		riders[linea] = new Models.Ride(new Models.Location(maEp[0],maEp[1]),new Models.Location(maEp[2],maEp[3]),maEp[4],maEp[5], linea);
-		linea++;
+		var maEp = matrix[line].split(' ');
+		riderList[parseInt(line)] = new Models.Ride(new Models.Location(parseInt(maEp[0]),parseInt(maEp[1])),new Models.Location(parseInt(maEp[2]),parseInt(maEp[3])),parseInt(maEp[4]),parseInt(maEp[5]), parseInt(line));
+		line++;
 	}
 
 	console.log(Game);
-	console.log(riders);
+	console.log(riderList);
+
+
+
+
+resultText('Test');
+
+//Lista de car vs riders
+function resultText(message){
+	//Car - Ride
+	var fs = require('fs');
+	fs.writeFile('./test.in', message, function(err){
+		if(err){
+			return console.log(err);
+		}
+	});
+}
