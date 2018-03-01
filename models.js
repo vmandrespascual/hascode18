@@ -16,7 +16,7 @@ Ride.prototype.assignRide = function(car) {
 }
 
 Ride.prototype.calculatePoints = function() {
-	return 0; //todo
+	return this.points; //todo ride + bonus
 }
 
 
@@ -44,10 +44,12 @@ Car.prototype.isBusy = function() {
 }
 
 Car.prototype.move = function(ride) {
+
 	if (this.currentTrip && this.isPicked) {
-		//TODO move to this.currentTrip.finish
+		this.moveTowardLoc(this.currentTrip.finish);
+		this.currentTrip.points++;
 	} else if (ride) {
-		//TODO move to ride.start
+		this.moveTowardLoc(ride.start);
 	} else {
 		throw 'Tell where to move';
 	}
@@ -58,6 +60,22 @@ Car.prototype.move = function(ride) {
 	}
 
 	return null;
+}
+
+
+Car.prototype.moveTowardLoc = function(loc) {
+
+	if (this.location.x > loc.x) {
+		this.location.x--;
+	} else if (this.location.x < loc.x) {
+		this.location.x++;
+	}
+
+	if (this.location.y > loc.y) {
+		this.location.y--;
+	} else if (this.location.y < loc.y) {
+		this.location.y++;
+	}
 }
 
 
