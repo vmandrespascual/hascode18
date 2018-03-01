@@ -1,19 +1,35 @@
-var car = function() {
 
-	this.location_x = 0;
-	this.location_y = 0;
-	this.isBusy = false; 
-}
-
-
-var ride = function(st, ed, earl, last) {
+var Ride = function(st, ed, earl, last) {
 
 	this.start = st;
 	this.finish = ed;
 	this.earliest = earl;
 	this.latest = last;
+	this.car = null;
+}
+
+Ride.prototype.assignRide = function(car) {
+	car.currentTrip = this;
+	this.car = car;
 }
 
 
-module.exports.car = car;
-module.exports.ride = ride;
+var Location = function(a, b) {
+	this.x = a;
+	this.y = b;
+}
+
+
+var Car = function() {
+
+	this.location = new Location(0,0);
+	this.currentTrip = null;
+}
+
+Car.protoype.isBusy = function() {
+	return this.currentTrip != undefined;
+}
+
+module.exports.Car = Car;
+module.exports.Ride = Ride;
+module.exports.Location = Location;
