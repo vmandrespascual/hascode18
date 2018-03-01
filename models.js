@@ -25,10 +25,10 @@ var Car = function() {
 	this.location = new Location(0,0);
 	this.currentTrip = null;
 }
-
+/*
 Car.protoype.isBusy = function() {
 	return this.currentTrip != undefined;
-}
+}*/
 
 
 var Game = function(rows, cols, cars, rides, bonus, steps) {
