@@ -1,10 +1,11 @@
 
-var Ride = function(st, ed, earl, last) {
+var Ride = function(st, ed, earl, last, index) {
 
 	this.start = st; //location instance
 	this.finish = ed; //location instance
 	this.earliest = earl;
 	this.latest = last;
+	this.index = index;
 	this.car = null;
 	this.points = 0;
 }
@@ -25,21 +26,24 @@ var Location = function(a, b) {
 }
 
 Location.prototype.isSame = function(otherLoc) {
-	return this.x == otherLoc.x && this.y = otherLoc.y;
+	return this.x == otherLoc.x && this.y == otherLoc.y;
 }
 
-var Car = function() {
+var Car = function(index) {
 
 	this.location = new Location(0,0);
 	this.currentTrip = null;
 	this.isPicked = false;
+	this.completedRides = [];
+	this.index = index;
 }
-/*
-Car.protoype.isBusy = function() {
-	return this.currentTrip != undefined;
-}*/
 
-Car.protoype.move = function(ride) {
+
+Car.prototype.isBusy = function() {
+	return this.currentTrip != undefined;
+}
+
+Car.prototype.move = function(ride) {
 	if (this.currentTrip && this.isPicked) {
 		//TODO move to this.currentTrip.finish
 	} else if (ride) {
@@ -48,8 +52,12 @@ Car.protoype.move = function(ride) {
 		throw 'Tell where to move';
 	}
 
-	return this.currentTrip && this.location.isSame(this.currentTrip.finish) ?
-			currentTrip.calculatePoints() : null;
+	if (this.currentTrip && this.location.isSame(this.currentTrip.finish)) {
+		this.completedRides.push(this.currentTrip.index);
+		return currentTrip.calculatePoints();
+	}
+
+	return null;
 }
 
 
