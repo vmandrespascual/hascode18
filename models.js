@@ -30,6 +30,18 @@ Car.protoype.isBusy = function() {
 	return this.currentTrip != undefined;
 }
 
+
+var Game = function(rows, cols, cars, rides, bonus, steps) {
+
+	this.rows = rows;
+	this.cols = cols;
+	this.cars = cars;
+	this.rides = rides;
+	this.bonus = bonus;
+	this.steps = steps;
+}
+
 module.exports.Car = Car;
 module.exports.Ride = Ride;
 module.exports.Location = Location;
+module.exports.Game = Game;
